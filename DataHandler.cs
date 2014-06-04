@@ -111,7 +111,7 @@ namespace C3Mod
             Int16 Damage = (Int16)args.Data.ReadInt16();
             var player = C3Tools.GetC3PlayerByIndex(PlayerID);
             bool PVP = args.Data.ReadBoolean();
-            byte Crit = (byte)args.Data.ReadByte();
+			bool Crit = args.Data.ReadBoolean();
 
             if (player.SpawnProtectionEnabled)
             {
