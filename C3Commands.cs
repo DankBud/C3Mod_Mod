@@ -1291,5 +1291,11 @@ namespace C3Mod
 		}
 
 		#endregion
+
+
+        public static void Reload(CommandArgs args)
+        {
+            C3Tools.ReloadConfig(args);
+        }
 	}
 }

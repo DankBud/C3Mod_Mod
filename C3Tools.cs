@@ -13,6 +13,27 @@ namespace C3Mod
 	{
 		internal static string C3ConfigPath { get { return Path.Combine(TShock.SavePath, "c3modconfig.json"); } }
 
+
+        public static void ReloadConfig(CommandArgs args)
+        {
+            try
+            {
+                if (File.Exists(C3ConfigPath))
+                {
+                    C3Mod.C3Config = C3ConfigFile.Read(C3ConfigPath);
+                    // Add all the missing config properties in the json file
+                }
+                C3Mod.C3Config.Write(C3ConfigPath);
+                args.Player.SendSuccessMessage("C3Mod Config reloaded successfully!");
+            }
+            catch (Exception ex)
+            {
+                args.Player.SendSuccessMessage("C3Mod config file reload failed! Check logs for more details!");
+                Log.Error(string.Concat("C3Mod Config Exception:\n", ex.ToString()));
+            }
+        }
+
+
 		internal static void SetupConfig()
 		{
 			try

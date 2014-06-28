@@ -19,9 +19,11 @@ namespace C3Mod
 		public static bool VoteRunning { get; set; }
 		public static string VoteType { get; set; }
 		public static List<C3Player> C3Players = new List<C3Player>();
-		internal static SqlTableEditor SQLEditor;
-		internal static SqlTableCreator SQLWriter;
+        internal static SqlTableEditor SQLEditor;
+        internal static SqlTableCreator SQLWriter;
 		internal static readonly Version VersionNum = Assembly.GetExecutingAssembly().GetName().Version;
+
+
 
 		public override string Name
 		{
@@ -241,6 +243,7 @@ namespace C3Mod
 			Commands.ChatCommands.Add(new Command("vote", C3Commands.StartVote, "vote"));
 			Commands.ChatCommands.Add(new Command("joinvote", C3Commands.JoinVote, "join"));
 			Commands.ChatCommands.Add(new Command("managec3settings", C3Commands.Stop, "stop"));
+            Commands.ChatCommands.Add(new Command("managec3settings", C3Commands.Reload, "c3reload"));
 			Commands.ChatCommands.Add(new Command(C3Commands.Quit, "quit"));
 			Commands.ChatCommands.Add(new Command("managec3settings", C3Commands.SetCTFLimit, "setctflimit"));
 			Commands.ChatCommands.Add(new Command("managec3settings", C3Commands.SetOneFlagLimit, "setoneflaglimit"));
@@ -274,7 +277,7 @@ namespace C3Mod
 			);
 			SQLWriter.EnsureExists(table);
 
-			if ((ArenaCount = SQLEditor.ReadColumn("FlagPoints", "Name", new List<SqlValue>()).Count) != 0)
+            if ((ArenaCount = SQLEditor.ReadColumn("FlagPoints", "Name", new List<SqlValue>()).Count) != 0) 
 			{
 				for (int i = 0; i < ArenaCount; i++)
 				{
@@ -305,7 +308,7 @@ namespace C3Mod
 			);
 			SQLWriter.EnsureExists(table);
 
-			if ((ArenaCount = SQLEditor.ReadColumn("DuelSpawns", "Name", new List<SqlValue>()).Count) != 0)
+			if ((ArenaCount = SQLEditor.ReadColumn("DuelSpawns", "Name", new List<SqlValue>()).Count) != 0) 
 			{
 				for (int i = 0; i < ArenaCount; i++)
 				{
@@ -518,5 +521,5 @@ namespace C3Mod
 				}
 			}
 		}
-	}
+    }
 }
